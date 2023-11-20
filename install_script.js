@@ -33,4 +33,21 @@ function update() {
   log(`文件下载完成: 🌚 ${moduleName}`)
 }
 
+ /**
+  * @description GET，返回String数据
+  * @param {*} param0 request信息
+  * @param {*} callback 回调返回response和String对象
+  */
+  const getStr = async ({ url, headers = {} }, callback = () => {} ) => {
+    request.url = url
+    request.method = 'GET'
+    request.headers = {
+      ...headers,
+      ...defaultHeaders
+    }
+    const data = await request.loadString()
+    callback(request.response, data)
+    return data
+  }
+
 update();
